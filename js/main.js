@@ -106,10 +106,78 @@ function setupNewsletter() {
   });
 }
 
+// ===== ヒーロースライダー =====
+function setupHeroSlider() {
+  const slider = document.getElementById('heroSlider');
+  const track = document.getElementById('heroTrack');
+  const dotsWrap = document.getElementById('heroDots');
+  if (!slider || !track || !dotsWrap) return;
+
+  const slides = Array.from(track.children);
+  const total = slides.length;
+  if (total === 0) return;
+
+  let current = 0;
+  let timer;
+  const INTERVAL = 5000;
+
+  // ドット生成
+  const dots = slides.map((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'hero-slider__dot';
+    dot.setAttribute('role', 'tab');
+    dot.setAttribute('aria-label', `${i + 1}番目のスライドへ`);
+    dot.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(dot);
+    return dot;
+  });
+
+  function update() {
+    track.style.transform = `translateX(-${current * 100}%)`;
+    slides.forEach((slide, i) => slide.classList.toggle('is-active', i === current));
+    dots.forEach((dot, i) => {
+      const active = i === current;
+      dot.classList.toggle('is-active', active);
+      dot.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+  }
+
+  function goTo(index) {
+    current = (index + total) % total;
+    update();
+    restart();
+  }
+
+  const next = () => goTo(current + 1);
+  const prev = () => goTo(current - 1);
+
+  function restart() {
+    clearInterval(timer);
+    timer = setInterval(next, INTERVAL);
+  }
+
+  document.getElementById('heroNext')?.addEventListener('click', next);
+  document.getElementById('heroPrev')?.addEventListener('click', prev);
+
+  // ホバー中は自動再生を停止
+  slider.addEventListener('mouseenter', () => clearInterval(timer));
+  slider.addEventListener('mouseleave', restart);
+
+  // タブが非表示の間は止める
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) clearInterval(timer);
+    else restart();
+  });
+
+  update();
+  restart();
+}
+
 // ===== 初期化 =====
 document.addEventListener('DOMContentLoaded', () => {
   renderProducts();
   setupHamburger();
   setupSmoothScroll();
   setupNewsletter();
+  setupHeroSlider();
 });

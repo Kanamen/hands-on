@@ -4,4 +4,4 @@ node_modules/
 .vscode/
 .idea/
 .playwright-mcp/
-category-section.png
+*.png
