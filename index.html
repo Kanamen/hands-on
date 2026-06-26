@@ -12,7 +12,7 @@
   <header class="header">
     <div class="container header__inner">
       <a href="#" class="header__logo">SHOP HANDS-ON</a>
-      <nav class="nav">
+      <nav class="nav" id="globalNav">
         <ul class="nav__list">
           <li class="nav__item"><a href="#new">新着</a></li>
           <li class="nav__item"><a href="#category">カテゴリー</a></li>
@@ -21,128 +21,81 @@
         </ul>
       </nav>
       <div class="header__actions">
-        <button class="icon-btn" aria-label="検索">🔍</button>
-        <button class="icon-btn" aria-label="お気に入り">♡</button>
-        <button class="icon-btn cart-btn" aria-label="カート" id="cartBtn">
-          🛒<span class="cart-count" id="cartCount">0</span>
+        <button class="icon-btn" aria-label="検索">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
         </button>
-        <button class="hamburger" id="hamburger" aria-label="メニュー">
+        <button class="icon-btn" aria-label="お気に入り">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5 4.2 12.7a4.6 4.6 0 0 1 6.5-6.5l1.3 1.3 1.3-1.3a4.6 4.6 0 0 1 6.5 6.5z"/></svg>
+        </button>
+        <button class="icon-btn cart-btn" aria-label="カート" id="cartBtn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="メニュー" aria-expanded="false" aria-controls="globalNav">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- ヒーロー（ビジュアルスライダー） -->
-  <section class="hero-slider" id="heroSlider" aria-label="メインビジュアル" aria-roledescription="カルーセル">
-    <div class="hero-slider__track" id="heroTrack">
-      <!-- スライド1 -->
-      <div class="hero-slide hero-slide--1" role="group" aria-roledescription="スライド" aria-label="1 / 3">
-        <div class="container hero-slide__inner">
-          <div class="hero-slide__content">
-            <p class="hero-slide__sub">SUMMER COLLECTION 2026</p>
-            <h2 class="hero-slide__title">毎日に、<br>ちょっといいものを。</h2>
-            <p class="hero-slide__text">厳選されたアイテムを、あなたのもとへ。新作が続々入荷中です。</p>
-            <a href="#new" class="btn btn--primary">商品を見る</a>
-          </div>
-        </div>
-        <div class="hero-slide__deco" aria-hidden="true">🛍️</div>
-      </div>
-      <!-- スライド2 -->
-      <div class="hero-slide hero-slide--2" role="group" aria-roledescription="スライド" aria-label="2 / 3">
-        <div class="container hero-slide__inner">
-          <div class="hero-slide__content">
-            <p class="hero-slide__sub">SPECIAL CAMPAIGN</p>
-            <h2 class="hero-slide__title">夏の新生活フェア<br>最大30%OFF</h2>
-            <p class="hero-slide__text">人気アイテムが今だけお買い得。この夏の模様替えはお早めに。</p>
-            <a href="#featured" class="btn btn--primary">特集を見る</a>
-          </div>
-        </div>
-        <div class="hero-slide__deco" aria-hidden="true">🏷️</div>
-      </div>
-      <!-- スライド3 -->
-      <div class="hero-slide hero-slide--3" role="group" aria-roledescription="スライド" aria-label="3 / 3">
-        <div class="container hero-slide__inner">
-          <div class="hero-slide__content">
-            <p class="hero-slide__sub">FREE SHIPPING</p>
-            <h2 class="hero-slide__title">5,000円以上で<br>送料無料</h2>
-            <p class="hero-slide__text">まとめ買いがおトク。お気に入りをまとめてお届けします。</p>
-            <a href="#new" class="btn btn--primary">今すぐ探す</a>
-          </div>
-        </div>
-        <div class="hero-slide__deco" aria-hidden="true">🚚</div>
+  <!-- ヒーロー -->
+  <section class="hero" aria-label="メインビジュアル">
+    <div class="hero__media">
+      <img src="images/hero.jpg" alt="シンプルな暮らしの道具のある部屋" />
+    </div>
+    <div class="hero__panel">
+      <div class="hero__inner">
+        <p class="hero__label">SIMPLE &amp; NATURAL</p>
+        <h2 class="hero__title">毎日に、<br>ちょうどいいものを。</h2>
+        <p class="hero__text">使う人のことを考えた、シンプルで質のよい暮らしの道具。素材を見つめ直し、無駄を省いて、ていねいに仕上げました。</p>
+        <a href="#new" class="btn btn--line">商品を見る</a>
       </div>
     </div>
-
-    <!-- 前後ボタン -->
-    <button class="hero-slider__arrow hero-slider__arrow--prev" id="heroPrev" aria-label="前のスライド">‹</button>
-    <button class="hero-slider__arrow hero-slider__arrow--next" id="heroNext" aria-label="次のスライド">›</button>
-
-    <!-- インジケーター -->
-    <div class="hero-slider__dots" id="heroDots" role="tablist" aria-label="スライド選択"></div>
   </section>
 
   <!-- カテゴリー -->
   <section class="section" id="category">
     <div class="container">
-      <h2 class="section__title">カテゴリーから探す</h2>
+      <div class="section__head">
+        <p class="section__label">CATEGORY</p>
+        <h2 class="section__title">カテゴリーから探す</h2>
+      </div>
       <div class="category-grid">
-        <a href="#" class="category-card" style="--cat-from:#f78da7; --cat-to:#e8533f;">
-          <span class="category-card__icon">👕</span>
-          <span class="category-card__body">
-            <span class="category-card__name">ファッション</span>
-            <span class="category-card__count">128 アイテム</span>
-          </span>
-          <span class="category-card__arrow">→</span>
+        <a href="#" class="cat-card">
+          <span class="cat-card__name">ファッション</span>
+          <span class="cat-card__count">128 items</span>
         </a>
-        <a href="#" class="category-card" style="--cat-from:#6ab7f5; --cat-to:#3f7be8;">
-          <span class="category-card__icon">🏠</span>
-          <span class="category-card__body">
-            <span class="category-card__name">インテリア</span>
-            <span class="category-card__count">86 アイテム</span>
-          </span>
-          <span class="category-card__arrow">→</span>
+        <a href="#" class="cat-card">
+          <span class="cat-card__name">インテリア</span>
+          <span class="cat-card__count">86 items</span>
         </a>
-        <a href="#" class="category-card" style="--cat-from:#f6a6c1; --cat-to:#d6589a;">
-          <span class="category-card__icon">💄</span>
-          <span class="category-card__body">
-            <span class="category-card__name">コスメ</span>
-            <span class="category-card__count">54 アイテム</span>
-          </span>
-          <span class="category-card__arrow">→</span>
+        <a href="#" class="cat-card">
+          <span class="cat-card__name">コスメ</span>
+          <span class="cat-card__count">54 items</span>
         </a>
-        <a href="#" class="category-card" style="--cat-from:#ffc46b; --cat-to:#f0915a;">
-          <span class="category-card__icon">🍳</span>
-          <span class="category-card__body">
-            <span class="category-card__name">キッチン</span>
-            <span class="category-card__count">73 アイテム</span>
-          </span>
-          <span class="category-card__arrow">→</span>
+        <a href="#" class="cat-card">
+          <span class="cat-card__name">キッチン</span>
+          <span class="cat-card__count">73 items</span>
         </a>
-        <a href="#" class="category-card" style="--cat-from:#7fd1a6; --cat-to:#3aa17e;">
-          <span class="category-card__icon">📚</span>
-          <span class="category-card__body">
-            <span class="category-card__name">本・雑貨</span>
-            <span class="category-card__count">102 アイテム</span>
-          </span>
-          <span class="category-card__arrow">→</span>
+        <a href="#" class="cat-card">
+          <span class="cat-card__name">本・雑貨</span>
+          <span class="cat-card__count">102 items</span>
         </a>
-        <a href="#" class="category-card" style="--cat-from:#b79cf0; --cat-to:#8a63d2;">
-          <span class="category-card__icon">🎁</span>
-          <span class="category-card__body">
-            <span class="category-card__name">ギフト</span>
-            <span class="category-card__count">41 アイテム</span>
-          </span>
-          <span class="category-card__arrow">→</span>
+        <a href="#" class="cat-card">
+          <span class="cat-card__name">ギフト</span>
+          <span class="cat-card__count">41 items</span>
         </a>
       </div>
     </div>
   </section>
 
   <!-- 新着商品 -->
-  <section class="section section--gray" id="new">
+  <section class="section section--soft" id="new">
     <div class="container">
-      <h2 class="section__title">新着商品</h2>
+      <div class="section__head">
+        <p class="section__label">NEW ARRIVALS</p>
+        <h2 class="section__title">新着商品</h2>
+      </div>
       <div class="product-grid" id="productGrid">
         <!-- JSで動的に生成 -->
       </div>
@@ -152,17 +105,22 @@
   <!-- 特集バナー -->
   <section class="section" id="featured">
     <div class="container">
-      <h2 class="section__title">特集</h2>
+      <div class="section__head">
+        <p class="section__label">FEATURE</p>
+        <h2 class="section__title">特集</h2>
+      </div>
       <div class="feature-grid">
         <a href="#" class="feature-banner feature-banner--1">
           <div class="feature-banner__text">
-            <h3>夏の新生活フェア</h3>
-            <p>最大30%OFF</p>
+            <span class="feature-banner__label">CAMPAIGN</span>
+            <h3>夏のくらしの整え方</h3>
+            <p>季節の模様替えに、最大30%OFF</p>
           </div>
         </a>
         <a href="#" class="feature-banner feature-banner--2">
           <div class="feature-banner__text">
-            <h3>送料無料キャンペーン</h3>
+            <span class="feature-banner__label">SHIPPING</span>
+            <h3>送料無料でお届け</h3>
             <p>5,000円以上のご購入で</p>
           </div>
         </a>
@@ -173,6 +131,7 @@
   <!-- ニュースレター -->
   <section class="newsletter" id="about">
     <div class="container newsletter__inner">
+      <p class="newsletter__label">NEWSLETTER</p>
       <h2 class="newsletter__title">ニュースレターに登録</h2>
       <p class="newsletter__text">新作情報やお得なクーポンをいち早くお届けします。</p>
       <form class="newsletter__form" id="newsletterForm">

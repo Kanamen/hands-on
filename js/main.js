@@ -2,14 +2,14 @@
 
 // ===== 商品データ（本来はAPIから取得） =====
 const products = [
-  { id: 1, name: 'オーガニックコットンTシャツ', price: 3980, emoji: '👕', badge: 'NEW' },
-  { id: 2, name: 'ハンドメイドマグカップ', price: 2480, emoji: '☕', badge: 'NEW' },
-  { id: 3, name: 'アロマキャンドル セット', price: 1980, emoji: '🕯️', badge: '' },
-  { id: 4, name: 'レザートートバッグ', price: 8900, emoji: '👜', badge: 'NEW' },
-  { id: 5, name: 'ステンレスボトル 500ml', price: 2980, emoji: '🍶', badge: '' },
-  { id: 6, name: 'ワイヤレスイヤホン', price: 5980, emoji: '🎧', badge: 'SALE' },
-  { id: 7, name: '観葉植物 モンステラ', price: 3480, emoji: '🪴', badge: '' },
-  { id: 8, name: 'リネンクッションカバー', price: 1680, emoji: '🛋️', badge: '' },
+  { id: 1, name: 'オーガニックコットンTシャツ', price: 3980, image: 'images/product-1.jpg', badge: 'NEW' },
+  { id: 2, name: 'ハンドメイドマグカップ', price: 2480, image: 'images/product-2.jpg', badge: 'NEW' },
+  { id: 3, name: 'アロマキャンドル セット', price: 1980, image: 'images/product-3.jpg', badge: '' },
+  { id: 4, name: 'レザートートバッグ', price: 8900, image: 'images/product-4.jpg', badge: 'NEW' },
+  { id: 5, name: 'ステンレスボトル 500ml', price: 2980, image: 'images/product-5.jpg', badge: '' },
+  { id: 6, name: 'ワイヤレスイヤホン', price: 5980, image: 'images/product-6.jpg', badge: 'SALE' },
+  { id: 7, name: '観葉植物 モンステラ', price: 3480, image: 'images/product-7.jpg', badge: '' },
+  { id: 8, name: 'リネンクッションカバー', price: 1680, image: 'images/product-8.jpg', badge: '' },
 ];
 
 // ===== カート =====
@@ -33,11 +33,13 @@ function renderProducts() {
     .map(
       (p) => `
       <article class="product-card">
-        <div class="product-card__img">${p.emoji}</div>
+        <div class="product-card__media">
+          ${p.badge ? `<span class="product-card__badge product-card__badge--${p.badge.toLowerCase()}">${p.badge}</span>` : ''}
+          <img src="${p.image}" alt="${p.name}" loading="lazy">
+        </div>
         <div class="product-card__body">
-          ${p.badge ? `<span class="product-card__badge">${p.badge}</span>` : ''}
           <h3 class="product-card__name">${p.name}</h3>
-          <p class="product-card__price">¥${p.price.toLocaleString()}</p>
+          <p class="product-card__price">¥${p.price.toLocaleString()}<small>(税込)</small></p>
           <button class="product-card__btn" data-id="${p.id}">カートに入れる</button>
         </div>
       </article>`
@@ -75,9 +77,19 @@ function setupHamburger() {
   const nav = document.querySelector('.nav');
   if (!hamburger || !nav) return;
 
+  const setOpen = (open) => {
+    nav.classList.toggle('is-open', open);
+    hamburger.classList.toggle('is-active', open);
+    hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  };
+
   hamburger.addEventListener('click', () => {
-    const isOpen = nav.style.display === 'block';
-    nav.style.display = isOpen ? 'none' : 'block';
+    setOpen(!nav.classList.contains('is-open'));
+  });
+
+  // メニュー内のリンクをタップしたら閉じる
+  nav.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setOpen(false));
   });
 }
 
@@ -106,78 +118,10 @@ function setupNewsletter() {
   });
 }
 
-// ===== ヒーロースライダー =====
-function setupHeroSlider() {
-  const slider = document.getElementById('heroSlider');
-  const track = document.getElementById('heroTrack');
-  const dotsWrap = document.getElementById('heroDots');
-  if (!slider || !track || !dotsWrap) return;
-
-  const slides = Array.from(track.children);
-  const total = slides.length;
-  if (total === 0) return;
-
-  let current = 0;
-  let timer;
-  const INTERVAL = 5000;
-
-  // ドット生成
-  const dots = slides.map((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = 'hero-slider__dot';
-    dot.setAttribute('role', 'tab');
-    dot.setAttribute('aria-label', `${i + 1}番目のスライドへ`);
-    dot.addEventListener('click', () => goTo(i));
-    dotsWrap.appendChild(dot);
-    return dot;
-  });
-
-  function update() {
-    track.style.transform = `translateX(-${current * 100}%)`;
-    slides.forEach((slide, i) => slide.classList.toggle('is-active', i === current));
-    dots.forEach((dot, i) => {
-      const active = i === current;
-      dot.classList.toggle('is-active', active);
-      dot.setAttribute('aria-selected', active ? 'true' : 'false');
-    });
-  }
-
-  function goTo(index) {
-    current = (index + total) % total;
-    update();
-    restart();
-  }
-
-  const next = () => goTo(current + 1);
-  const prev = () => goTo(current - 1);
-
-  function restart() {
-    clearInterval(timer);
-    timer = setInterval(next, INTERVAL);
-  }
-
-  document.getElementById('heroNext')?.addEventListener('click', next);
-  document.getElementById('heroPrev')?.addEventListener('click', prev);
-
-  // ホバー中は自動再生を停止
-  slider.addEventListener('mouseenter', () => clearInterval(timer));
-  slider.addEventListener('mouseleave', restart);
-
-  // タブが非表示の間は止める
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) clearInterval(timer);
-    else restart();
-  });
-
-  update();
-  restart();
-}
-
 // ===== 初期化 =====
 document.addEventListener('DOMContentLoaded', () => {
   renderProducts();
   setupHamburger();
   setupSmoothScroll();
   setupNewsletter();
-  setupHeroSlider();
 });
