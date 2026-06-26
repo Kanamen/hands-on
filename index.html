@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SHOP HANDS-ON - 厳選されたアイテムをお届けするオンラインストア">
+  <title>SHOP HANDS-ON | オンラインストア</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- ヘッダー -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="#" class="header__logo">SHOP HANDS-ON</a>
+      <nav class="nav">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="#new">新着</a></li>
+          <li class="nav__item"><a href="#category">カテゴリー</a></li>
+          <li class="nav__item"><a href="#featured">特集</a></li>
+          <li class="nav__item"><a href="#about">ストアについて</a></li>
+        </ul>
+      </nav>
+      <div class="header__actions">
+        <button class="icon-btn" aria-label="検索">🔍</button>
+        <button class="icon-btn" aria-label="お気に入り">♡</button>
+        <button class="icon-btn cart-btn" aria-label="カート" id="cartBtn">
+          🛒<span class="cart-count" id="cartCount">0</span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="メニュー">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ヒーロー -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="hero__content">
+        <p class="hero__sub">SUMMER COLLECTION 2026</p>
+        <h1 class="hero__title">毎日に、<br>ちょっといいものを。</h1>
+        <p class="hero__text">厳選されたアイテムを、あなたのもとへ。新作が続々入荷中です。</p>
+        <a href="#new" class="btn btn--primary">商品を見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- カテゴリー -->
+  <section class="section" id="category">
+    <div class="container">
+      <h2 class="section__title">カテゴリーから探す</h2>
+      <div class="category-grid">
+        <a href="#" class="category-card">
+          <div class="category-card__icon">👕</div>
+          <span>ファッション</span>
+        </a>
+        <a href="#" class="category-card">
+          <div class="category-card__icon">🏠</div>
+          <span>インテリア</span>
+        </a>
+        <a href="#" class="category-card">
+          <div class="category-card__icon">💄</div>
+          <span>コスメ</span>
+        </a>
+        <a href="#" class="category-card">
+          <div class="category-card__icon">🍳</div>
+          <span>キッチン</span>
+        </a>
+        <a href="#" class="category-card">
+          <div class="category-card__icon">📚</div>
+          <span>本・雑貨</span>
+        </a>
+        <a href="#" class="category-card">
+          <div class="category-card__icon">🎁</div>
+          <span>ギフト</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 新着商品 -->
+  <section class="section section--gray" id="new">
+    <div class="container">
+      <h2 class="section__title">新着商品</h2>
+      <div class="product-grid" id="productGrid">
+        <!-- JSで動的に生成 -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 特集バナー -->
+  <section class="section" id="featured">
+    <div class="container">
+      <h2 class="section__title">特集</h2>
+      <div class="feature-grid">
+        <a href="#" class="feature-banner feature-banner--1">
+          <div class="feature-banner__text">
+            <h3>夏の新生活フェア</h3>
+            <p>最大30%OFF</p>
+          </div>
+        </a>
+        <a href="#" class="feature-banner feature-banner--2">
+          <div class="feature-banner__text">
+            <h3>送料無料キャンペーン</h3>
+            <p>5,000円以上のご購入で</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ニュースレター -->
+  <section class="newsletter" id="about">
+    <div class="container newsletter__inner">
+      <h2 class="newsletter__title">ニュースレターに登録</h2>
+      <p class="newsletter__text">新作情報やお得なクーポンをいち早くお届けします。</p>
+      <form class="newsletter__form" id="newsletterForm">
+        <input type="email" class="newsletter__input" placeholder="メールアドレスを入力" required>
+        <button type="submit" class="btn btn--primary">登録する</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__col">
+        <h4 class="footer__logo">SHOP HANDS-ON</h4>
+        <p class="footer__desc">毎日に、ちょっといいものを。</p>
+      </div>
+      <div class="footer__col">
+        <h5>ショッピング</h5>
+        <ul>
+          <li><a href="#">新着商品</a></li>
+          <li><a href="#">ランキング</a></li>
+          <li><a href="#">セール</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h5>サポート</h5>
+        <ul>
+          <li><a href="#">よくある質問</a></li>
+          <li><a href="#">配送について</a></li>
+          <li><a href="#">お問い合わせ</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h5>会社情報</h5>
+        <ul>
+          <li><a href="#">運営会社</a></li>
+          <li><a href="#">利用規約</a></li>
+          <li><a href="#">プライバシーポリシー</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>&copy; 2026 SHOP HANDS-ON. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
